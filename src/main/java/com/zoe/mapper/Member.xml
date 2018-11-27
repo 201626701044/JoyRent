@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.zoe.mapper.MemberMapper">
+	    <insert id="add" parameterType="Member" >
+	        insert into member ( member_name ) values (#{member_name})
+	    </insert>
+	    
+	    <delete id="delete" parameterType="Member" >
+	        delete from member where member_ID= #{member_ID}
+	    </delete>
+	    
+	    <select id="get" parameterType="_int" resultType="Member">
+	        select * from   member  where member_ID= #{member_ID}
+	    </select>
+
+	    <update id="update" parameterType="Member" >
+	        update member set member_name=#{member_name} where member_ID=#{member_ID}
+	    </update>
+	    <select id="list" resultType="Member">
+	        select * from  member
+			<if test="start!=null and count!=null">
+				limit #{start},#{count}
+			</if>
+		</select>
+	    <select id="total" resultType="int">
+		   select count(*) from   member
+	    </select>
+
+	</mapper>
+
